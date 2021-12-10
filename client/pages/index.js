@@ -20,7 +20,7 @@ export default function Home({ todos }) {
 }
 
 export const getStaticProps = async () => {
-	const res = await axios.get(process.env.API_BASE_URL + `/todos`)
+	const res = await axios.get(process.env.NEXT_PUBLIC_API_BASE_URL + `/todos`)
 	const todos = await res.data.data
 
 	return {

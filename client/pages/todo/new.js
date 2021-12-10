@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 export default function Home() {
 	const { register, handleSubmit, formState: { errors } } = useForm()
 	const submitNewTodo = async(data) => {
-		const res = await axios.post(`http://127.0.0.1:8000/api/todo`, {
+		const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/todo`, {
 			...data
 		}).then(() => {
 			Swal.fire({
@@ -59,7 +59,7 @@ export default function Home() {
 }
 
 export const getStaticProps = async () => {
-	const res = await axios.get(`http://127.0.0.1:8000/api/todos`)
+	const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/todos`)
 	const todos = await res.data
 
 	return {
