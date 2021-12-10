@@ -8,7 +8,7 @@ export default function Lists({ todos }) {
 			title: 'Delete confirmation',
 			text: 'Are you sure you want to delete this task?',
 			showCancelButton: true,
-			confirmButtonColor: '#059669',
+			confirmButtonColor: '#f87171',
 			confirmButtonText: 'Yes, delete it.',
 		}).then((result) => {
 			if (result.isConfirmed) {
@@ -18,7 +18,7 @@ export default function Lists({ todos }) {
 	}
 
 	const deleteTodo = async (todoId) => {
-		await axios.delete(`http://127.0.0.1:8000/api/todo/${todoId}`)
+		await axios.delete(`${process.env.NEXT_PUBLIC_API_BASE_URL}/todo/${todoId}`)
 		Swal.fire({
 			title: 'Success!',
 			text: 'Successfully saved.',
@@ -43,7 +43,7 @@ export default function Lists({ todos }) {
 	}
 
 	const updateStatus = async (todoId, status) => {
-		await axios.put(`http://127.0.0.1:8000/api/todo/update-status/${todoId}`, {
+		await axios.put(`${process.env.NEXT_PUBLIC_API_BASE_URL}/todo/update-status/${todoId}`, {
 			'is_completed': status,
 		})
 		Swal.fire({
@@ -75,7 +75,7 @@ export default function Lists({ todos }) {
 							<td width="5%">{todo.is_completed ? 'Completed' : 'Ongoing'}</td>
 							<td>
 								<div className="flex items-center gap-x-2">
-									<button className="bg-green-600 text-white px-6 py-2 text-xs hover:bg-green-700" onClick={() => updateStatusConfirmation(todo.id, !todo.is_completed)}>
+									<button className={`text-white px-6 py-2 text-xs ${todo.is_completed ? "bg-yellow-400 hover:bg-yellow-500" : "bg-green-600 hover:bg-green-700"}`} onClick={() => updateStatusConfirmation(todo.id, !todo.is_completed)}>
 										{todo.is_completed ? 'Mark as Ongoing' : 'Mark as Completed'}
 									</button>
 									<button className="bg-blue-500 text-white px-6 py-2 text-xs hover:bg-blue-700">

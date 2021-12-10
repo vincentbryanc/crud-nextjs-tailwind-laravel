@@ -13,10 +13,9 @@ export default function Home() {
 		}).then(() => {
 			Swal.fire({
 				title: 'Success!',
-				text: 'Successfully saved.',
+				text: 'New Todo has been successfully saved.',
 				icon: 'success',
 				confirmButtonColor: '#059669',
-				confirmButtonText: 'New Todo has been successfully saved.',
 			})
 			Router.push('/')
 		}).catch(error => {
