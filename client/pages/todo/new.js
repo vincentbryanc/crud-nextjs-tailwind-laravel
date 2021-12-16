@@ -34,7 +34,7 @@ export default function Home() {
 							name="title"
 							className="form-control"
 							{...register('title', { required: true })} />
-						{errors.title?.type === "required" && <div class="error">Title field is required</div>}
+						{errors.title?.type === "required" && <div className="error">Title field is required</div>}
 					</div>
 					<div className="form-item">
 						<label htmlFor="description">Description</label>
@@ -43,8 +43,8 @@ export default function Home() {
 							rows="4"
 							className="form-control"
 							{...register('description', { required: true, maxLength: 300 })} />
-						{errors.description?.type === "required" && <div class="error">Description field is required</div>}
-						{errors.description?.type === "maxLength" && <div class="error">Description field must not exceed 300 characters</div>}
+						{errors.description?.type === "required" && <div className="error">Description field is required</div>}
+						{errors.description?.type === "maxLength" && <div className="error">Description field must not exceed 300 characters</div>}
 					</div>
 					<div className="form-item">
 						<button className="btn-primary">Save</button>

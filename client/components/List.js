@@ -1,15 +1,8 @@
 import axios from 'axios'
 import Router from 'next/router'
-import { useState } from 'react'
 import Swal from 'sweetalert2'
 
 export default function Lists({ todos }) {
-	const [todo, setTodo] = useState({
-		id: null,
-		title: null,
-		description: null,
-	})
-
 	const deleteTodoConfirmation = (todoId) => {
 		Swal.fire({
 			title: 'Delete confirmation',
@@ -63,11 +56,7 @@ export default function Lists({ todos }) {
 	}
 
 	const editTodo = (todo) => {
-		setTodo([...todo, {
-			id: todo.id,
-			title: todo.title,
-			description: todo.description,
-		}])
+		Router.push(`/todo/edit/${todo.id}`)
 	}
 
 	return (

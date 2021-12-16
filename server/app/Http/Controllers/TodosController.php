@@ -38,14 +38,14 @@ class TodosController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'is_completed' => 'required|boolean',
+            'description' => 'required',
         ]);
 
         $title = $request->title;
-        $is_completed = $request->is_completed;
+        $description = $request->description;
         $todoData = array(
             'title' => $title,
-            'is_completed' => $is_completed,
+            'description' => $description,
         );
         return Todos::whereId($id)->update($todoData);
     }
