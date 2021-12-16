@@ -7,13 +7,13 @@ import { useForm } from 'react-hook-form'
 
 export default function Home() {
 	const { register, handleSubmit, formState: { errors } } = useForm()
-	const submitNewTodo = async (data) => {
+	const updateTodo = async (data) => {
 		const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/todo`, {
 			...data
 		}).then(() => {
 			Swal.fire({
 				title: 'Success!',
-				text: 'New Todo has been successfully saved.',
+				text: 'Todo has been successfully updated.',
 				icon: 'success',
 				confirmButtonColor: '#059669',
 			})
@@ -26,8 +26,8 @@ export default function Home() {
 	return (
 		<Layout title="Home - CRUD">
 			<div>
-				<h1 className="text-center font-bold text-3xl mb-4">Add New Todo</h1>
-				<form className="max-w-2xl container mx-auto" onSubmit={handleSubmit(submitNewTodo)}>
+				<h1 className="text-center font-bold text-3xl mb-4">Edit Todo</h1>
+				<form className="max-w-2xl container mx-auto" onSubmit={handleSubmit(updateTodo)}>
 					<div className="form-item">
 						<label htmlFor="title">Title</label>
 						<input
@@ -56,4 +56,15 @@ export default function Home() {
 			</div>
 		</Layout>
 	)
+}
+
+export const getStaticProps = async () => {
+	const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/todos`)
+	const todos = await res.data
+
+	return {
+		props: {
+			todos
+		}
+	}
 }

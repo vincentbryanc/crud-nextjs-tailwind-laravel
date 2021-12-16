@@ -1,8 +1,15 @@
 import axios from 'axios'
 import Router from 'next/router'
+import { useState } from 'react'
 import Swal from 'sweetalert2'
 
 export default function Lists({ todos }) {
+	const [todo, setTodo] = useState({
+		id: null,
+		title: null,
+		description: null,
+	})
+
 	const deleteTodoConfirmation = (todoId) => {
 		Swal.fire({
 			title: 'Delete confirmation',
@@ -55,6 +62,14 @@ export default function Lists({ todos }) {
 		Router.push('/')
 	}
 
+	const editTodo = (todo) => {
+		setTodo([...todo, {
+			id: todo.id,
+			title: todo.title,
+			description: todo.description,
+		}])
+	}
+
 	return (
 		<div className="overflow-x-auto overflow-y-hidden">
 			<table className="w-full">
@@ -78,7 +93,7 @@ export default function Lists({ todos }) {
 									<button className={`text-white px-6 py-2 text-xs ${todo.is_completed ? "bg-yellow-400 hover:bg-yellow-500" : "bg-green-600 hover:bg-green-700"}`} onClick={() => updateStatusConfirmation(todo.id, !todo.is_completed)}>
 										{todo.is_completed ? 'Mark as Ongoing' : 'Mark as Completed'}
 									</button>
-									<button className="bg-blue-500 text-white px-6 py-2 text-xs hover:bg-blue-700">
+									<button className="bg-blue-500 text-white px-6 py-2 text-xs hover:bg-blue-700" onClick={() => editTodo(todo)}>
 										Edit
 									</button>
 									<button className="bg-red-400 text-white px-6 py-2 text-xs hover:bg-red-600" onClick={() => deleteTodoConfirmation(todo.id)}>
